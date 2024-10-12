@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static\css\style.css">
+    <title>Webtoon Character Page</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/"><img src="static\images\logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/add" class="active">Add a new webtoon</a></li>
+            <li><a href="/" class="disabled">Disabled</a></li>
+        </ul>
+    </div>
+
+    <div class="character-container">
+        <h1>1. Kappa</h1>
+        <div class="character-content">
+            <img src="static\images\1.jpg" alt="Kappa" class="character-image">
+            <div class="character-description">
+                <p>
+                    Kappa, or ‘The Beacon,’ is the primary protagonist of Wendy Lian Martin’s webtoon Castle Swimmer. He needs to fulfill various prophecies that are said to bring luck or salvation. Being a beacon signifies being a savior who provides light for people’s lives, even though he has to sacrifice his desires.
+                </p>
+                <p>
+                    Kindness, compassion, and a sense of duty describe Kappa above everything else. He still holds sympathy for others despite having heavy responsibilities laid upon him since birth, making him one of the best Castle Swimmer characters. But he also feels lonely and unable to control his life. In the narrative, Kappa’s most significant relationship is with Siren, the prince of the Shark Kingdom.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="character-container">
+        {% for webtoon in webtoons %}
+         <h2 class="webtoon-title">{{ webtoon.id }}. {{ webtoon.title }}</h2>
+        <div class="character-content">
+              {% if webtoon.image_path %}
+                    <img src="{{ url_for('static', filename=webtoon.image_path.split('static/')[1]) }}" alt="{{ webtoon.title }}">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            <div class="character-description">
+                <p class="webtoon-description">{{ webtoon.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
